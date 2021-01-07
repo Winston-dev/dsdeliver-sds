@@ -19,27 +19,38 @@ import com.devsuperior.dsdeliver.repositories.ProductRepository;
 @Service
 public class OrderService {
 
-	@Autowired//endpoint para salvar
+	@Autowired // endpoint para salvar
 	private OrderRepository repository;
-	
-	@Autowired//endpoint para salvar
-	private ProductRepository productRepository;//para isntanciar as entidade
+
+	@Autowired // endpoint para salvar
+	private ProductRepository productRepository;// para isntanciar as entidade
 
 	@Transactional(readOnly = true)
 	public List<OrderDTO> findAll() {
 		List<Order> list = repository.findOrdersWithProducts();
 		return list.stream().map(x -> new OrderDTO(x)).collect(Collectors.toList());
 	}
-	@Transactional//faz a transação e fecha o mbanco de dados
-	public OrderDTO insert(OrderDTO dto){//contem todos os dados do pedidoe todos os produtos desse pedido
-		Order order = new Order(null, dto.getAddress(),dto.getLatitude(), //instanciar o pedidos
-				dto.getLongitude(), Instant.now(), OrderStatus.PENDING);//instancia todos os pedidos
-		for(ProductDTO p : dto.getProducts()) {//percorrer todo os dto s
-			Product product = productRepository.getOne(p.getId());//instacia os pedidos e as associação com base id do p
-			order.getProducts().add(product);//adicionar um produto instsn. no productdto
-		 
-	 }
-		order = repository.save(order);//salva na variavel
-		return new OrderDTO(order);//retorna convertido para o dto
-}
+
+	@Transactional // faz a transação e fecha o mbanco de dados
+	public OrderDTO insert(OrderDTO dto) {// contem todos os dados do pedidoe todos os produtos desse pedido
+		Order order = new Order(null, dto.getAddress(), dto.getLatitude(), // instanciar o pedidos
+				dto.getLongitude(), Instant.now(), OrderStatus.PENDING);// instancia todos os pedidos
+		for (ProductDTO p : dto.getProducts()) {// percorrer todo os dto s
+			Product product = productRepository.getOne(p.getId());// instacia os pedidos e as associação com base id do
+																	// p
+			order.getProducts().add(product);// adicionar um produto instsn. no productdto
+
+		}
+		order = repository.save(order);// salva na variavel
+		return new OrderDTO(order);// retorna convertido para o dto
+	}
+
+	@Transactional // faz a transação e fecha o banco de dados
+	public OrderDTO setDelivered(Long id) {// e bloco de codigo e para confirmar que o pedido foi entregue
+		Order order = repository.getOne(id);
+		order.setStatus(OrderStatus.DELIVERED);// agora esta entregua
+		order = repository.save(order);// sauva o a confirmação
+		return new OrderDTO(order);// retorna o pedido
+	}
+
 }

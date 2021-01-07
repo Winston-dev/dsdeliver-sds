@@ -48,6 +48,7 @@ public class Order implements Serializable {
 		
 	}
 
+	
 	public Long getId() {
 		return id;
 	}
@@ -64,16 +65,16 @@ public class Order implements Serializable {
 		this.address = address;
 	}
 
-	public Double getLongitude() {
-		return longitude;
-	}
-
 	public Double getLatitude() {
 		return latitude;
 	}
 
 	public void setLatitude(Double latitude) {
 		this.latitude = latitude;
+	}
+
+	public Double getLongitude() {
+		return longitude;
 	}
 
 	public void setLongitude(Double longitude) {
@@ -92,10 +93,14 @@ public class Order implements Serializable {
 		return status;
 	}
 
+	public void setStatus(OrderStatus status) {
+		this.status = status;
+	}
+
 	public Set<Product> getProducts() {
 		return products;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
