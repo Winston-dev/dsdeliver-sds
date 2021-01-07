@@ -8,7 +8,11 @@ import com.devsuperior.dsdeliver.entities.Product;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
 	
-	List<Product> findAllByOrderByName();//Busca o nome e manda por ordem
+	
+
+	List<Product> findAllByOrderByNameAsc();
+
+	
 	
 }
  
