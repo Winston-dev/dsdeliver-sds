@@ -21,7 +21,7 @@ import com.devsuperior.dsdeliver.services.OrderService;
 
 @RestController
 @RequestMapping(value = "/orders")
-public class OrderColtroller {
+public class OrderController {
 	
 	@Autowired
 	private OrderService service;

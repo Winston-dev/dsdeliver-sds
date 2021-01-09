@@ -49,7 +49,7 @@ public class OrderService {
 	public OrderDTO setDelivered(Long id) {// e bloco de codigo e para confirmar que o pedido foi entregue
 		Order order = repository.getOne(id);
 		order.setStatus(OrderStatus.DELIVERED);// agora esta entregua
-		order = repository.save(order);// sauva o a confirmação
+		order = repository.save(order);// salva  a confirmação
 		return new OrderDTO(order);// retorna o pedido
 	}
 
