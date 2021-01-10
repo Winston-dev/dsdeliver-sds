@@ -7,14 +7,19 @@
     line-height: 16px;
     text-align: center;
     color: #FFF;
-  }
-  
-  .footer-icons {
+    position: absolute;
+    width: 1348px;
+    height: 55px;
+    left: 0px;
+    top: 600px;
+}
+
+.footer-icons {
     margin-top: 10px;
     display: flex;
     justify-content: center;
-  }
-  
-  .footer-icons > * {
+}
+
+.footer-icons>* {
     margin-right: 5px;
-  }
+}
